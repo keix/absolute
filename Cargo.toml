@@ -1,0 +1,36 @@
+[package]
+name = "system-calls"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.75"
+
+[[bin]]
+name = "system-calls"
+path = "src/main.rs"
+
+[[bin]]
+name = "local"
+path = "src/bin/local.rs"
+
+[dependencies]
+axum = "0.7"
+tower = "0.5"
+tower-http = { version = "0.6", features = ["trace", "cors"] }
+http = "1"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "signal"] }
+lambda_http = { version = "0.13", default-features = false, features = ["apigw_http"] }
+aws-config = { version = "1", features = ["behavior-version-latest"] }
+aws-sdk-dynamodb = "1"
+serde_dynamo = { version = "4", features = ["aws-sdk-dynamodb+1"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+thiserror = "1"
+
+[profile.release]
+strip = true
+lto = "fat"
+codegen-units = 1
+opt-level = 3
+panic = "abort"

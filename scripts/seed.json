@@ -1,0 +1,153 @@
+[
+  {
+    "PutRequest": {
+      "Item": {
+        "pk": { "S": "LINUX#x86_64" },
+        "sk": { "S": "SYSCALL#NAME#read" },
+        "entity_type": { "S": "syscall" },
+        "os": { "S": "linux" },
+        "arch": { "S": "x86_64" },
+        "number": { "N": "0" },
+        "abi": { "S": "common" },
+        "name": { "S": "read" },
+        "entry": { "S": "sys_read" },
+        "args": {
+          "L": [
+            { "M": { "index": { "N": "0" }, "register": { "S": "rdi" }, "name": { "S": "fd" },    "type": { "S": "unsigned int" } } },
+            { "M": { "index": { "N": "1" }, "register": { "S": "rsi" }, "name": { "S": "buf" },   "type": { "S": "char *" } } },
+            { "M": { "index": { "N": "2" }, "register": { "S": "rdx" }, "name": { "S": "count" }, "type": { "S": "size_t" } } }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "pk": { "S": "LINUX#x86_64" },
+        "sk": { "S": "SYSCALL#NR#0" },
+        "entity_type": { "S": "syscall" },
+        "os": { "S": "linux" },
+        "arch": { "S": "x86_64" },
+        "number": { "N": "0" },
+        "abi": { "S": "common" },
+        "name": { "S": "read" },
+        "entry": { "S": "sys_read" },
+        "args": {
+          "L": [
+            { "M": { "index": { "N": "0" }, "register": { "S": "rdi" }, "name": { "S": "fd" },    "type": { "S": "unsigned int" } } },
+            { "M": { "index": { "N": "1" }, "register": { "S": "rsi" }, "name": { "S": "buf" },   "type": { "S": "char *" } } },
+            { "M": { "index": { "N": "2" }, "register": { "S": "rdx" }, "name": { "S": "count" }, "type": { "S": "size_t" } } }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "pk": { "S": "LINUX#x86_64" },
+        "sk": { "S": "SYSCALL#NAME#write" },
+        "entity_type": { "S": "syscall" },
+        "os": { "S": "linux" },
+        "arch": { "S": "x86_64" },
+        "number": { "N": "1" },
+        "abi": { "S": "common" },
+        "name": { "S": "write" },
+        "entry": { "S": "sys_write" },
+        "args": {
+          "L": [
+            { "M": { "index": { "N": "0" }, "register": { "S": "rdi" }, "name": { "S": "fd" },    "type": { "S": "unsigned int" } } },
+            { "M": { "index": { "N": "1" }, "register": { "S": "rsi" }, "name": { "S": "buf" },   "type": { "S": "const char *" } } },
+            { "M": { "index": { "N": "2" }, "register": { "S": "rdx" }, "name": { "S": "count" }, "type": { "S": "size_t" } } }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "pk": { "S": "LINUX#x86_64" },
+        "sk": { "S": "SYSCALL#NR#1" },
+        "entity_type": { "S": "syscall" },
+        "os": { "S": "linux" },
+        "arch": { "S": "x86_64" },
+        "number": { "N": "1" },
+        "abi": { "S": "common" },
+        "name": { "S": "write" },
+        "entry": { "S": "sys_write" },
+        "args": {
+          "L": [
+            { "M": { "index": { "N": "0" }, "register": { "S": "rdi" }, "name": { "S": "fd" },    "type": { "S": "unsigned int" } } },
+            { "M": { "index": { "N": "1" }, "register": { "S": "rsi" }, "name": { "S": "buf" },   "type": { "S": "const char *" } } },
+            { "M": { "index": { "N": "2" }, "register": { "S": "rdx" }, "name": { "S": "count" }, "type": { "S": "size_t" } } }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "pk": { "S": "LINUX#x86_64" },
+        "sk": { "S": "SYSCALL#NAME#openat" },
+        "entity_type": { "S": "syscall" },
+        "os": { "S": "linux" },
+        "arch": { "S": "x86_64" },
+        "number": { "N": "257" },
+        "abi": { "S": "common" },
+        "name": { "S": "openat" },
+        "entry": { "S": "sys_openat" },
+        "args": {
+          "L": [
+            { "M": { "index": { "N": "0" }, "register": { "S": "rdi" }, "name": { "S": "dfd" },      "type": { "S": "int" } } },
+            { "M": { "index": { "N": "1" }, "register": { "S": "rsi" }, "name": { "S": "filename" }, "type": { "S": "const char *" } } },
+            { "M": { "index": { "N": "2" }, "register": { "S": "rdx" }, "name": { "S": "flags" },    "type": { "S": "int" } } },
+            { "M": { "index": { "N": "3" }, "register": { "S": "r10" }, "name": { "S": "mode" },     "type": { "S": "umode_t" } } }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "pk": { "S": "LINUX#x86_64" },
+        "sk": { "S": "SYSCALL#NR#257" },
+        "entity_type": { "S": "syscall" },
+        "os": { "S": "linux" },
+        "arch": { "S": "x86_64" },
+        "number": { "N": "257" },
+        "abi": { "S": "common" },
+        "name": { "S": "openat" },
+        "entry": { "S": "sys_openat" },
+        "args": {
+          "L": [
+            { "M": { "index": { "N": "0" }, "register": { "S": "rdi" }, "name": { "S": "dfd" },      "type": { "S": "int" } } },
+            { "M": { "index": { "N": "1" }, "register": { "S": "rsi" }, "name": { "S": "filename" }, "type": { "S": "const char *" } } },
+            { "M": { "index": { "N": "2" }, "register": { "S": "rdx" }, "name": { "S": "flags" },    "type": { "S": "int" } } },
+            { "M": { "index": { "N": "3" }, "register": { "S": "r10" }, "name": { "S": "mode" },     "type": { "S": "umode_t" } } }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "PutRequest": {
+      "Item": {
+        "pk": { "S": "LINUX#x86_64" },
+        "sk": { "S": "REGISTERS#SYSCALL" },
+        "entity_type": { "S": "register_convention" },
+        "os": { "S": "linux" },
+        "arch": { "S": "x86_64" },
+        "instruction": { "S": "syscall" },
+        "number_register": { "S": "rax" },
+        "argument_registers": { "L": [
+          { "S": "rdi" }, { "S": "rsi" }, { "S": "rdx" }, { "S": "r10" }, { "S": "r8" }, { "S": "r9" }
+        ] },
+        "return_register": { "S": "rax" }
+      }
+    }
+  }
+]

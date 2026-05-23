@@ -1,0 +1,13 @@
+/target
+**/*.rs.bk
+.direnv/
+result
+result-*
+infra/node_modules/
+infra/cdk.out/
+infra/.cdk.staging/
+infra/cdk.context.json
+scripts/seed-linux-x86_64.json
+*_*.db
+dynamodb-local-metadata.json
+shared-local-instance.db
