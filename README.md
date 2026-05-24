@@ -103,3 +103,9 @@ cargo run --example gen_seed
 ```
 
 Per-argument metadata (register/name/type) is intentionally out of scope. Responses include a `man_url` pointing at `man7.org/linux/man-pages/man2/{name}.2.html` (linux only) — clients should follow it for signatures and semantics.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
+
+The vendored `data/linux-x86_64-syscall_64.tbl` is from the Linux kernel under `GPL-2.0 WITH Linux-syscall-note`; the syscall-note exception explicitly permits use of syscall numbers in non-GPL userspace.
