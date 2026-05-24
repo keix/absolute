@@ -1,4 +1,4 @@
-# system-calls
+# Absolute
 
 API for syscall reference data across OSes × architectures. Axum on AWS Lambda backed by DynamoDB single-table.
 
@@ -44,7 +44,8 @@ cargo run --example gen_seed
 cargo run --bin local
 ```
 
-The local server listens on `:3000`. `seed.json` carries the register convention; the order of the two seed runs doesn't matter.
+The local server listens on `:3000`.  
+`seed.json` carries the register convention; the order of the two seed runs doesn't matter.
 
 ## Endpoints
 
@@ -83,7 +84,8 @@ Build and deploy:
 ./scripts/deploy.sh
 ```
 
-The stack outputs `ApiUrl`, `TableName`, `FunctionName`. To seed the deployed table, unset the local DDB endpoint and target the real one:
+The stack outputs `ApiUrl`, `TableName`, `FunctionName`.  
+To seed the deployed table, unset the local DDB endpoint and target the real one:
 
 ```sh
 unset DDB_ENDPOINT AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY
