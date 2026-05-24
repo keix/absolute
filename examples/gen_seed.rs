@@ -57,8 +57,7 @@ fn main() -> std::io::Result<()> {
                         "number": { "N": nr.to_string() },
                         "abi": { "S": abi },
                         "name": { "S": name },
-                        "entry": { "S": entry },
-                        "args": { "L": [] }
+                        "entry": { "S": entry }
                     }
                 }
             }));

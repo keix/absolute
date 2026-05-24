@@ -22,6 +22,7 @@
 
         rustToolchain = pkgs.rust-bin.stable.latest.default.override {
           extensions = [ "rust-src" "rust-analyzer" "clippy" "rustfmt" ];
+          targets = [ "aarch64-unknown-linux-gnu" ];
         };
       in
       {
@@ -44,8 +45,11 @@
             export DDB_ENDPOINT=''${DDB_ENDPOINT:-http://localhost:8000}
             export DDB_TABLE=''${DDB_TABLE:-system-calls-dev}
             export AWS_REGION=''${AWS_REGION:-ap-northeast-1}
-            export AWS_ACCESS_KEY_ID=''${AWS_ACCESS_KEY_ID:-local}
-            export AWS_SECRET_ACCESS_KEY=''${AWS_SECRET_ACCESS_KEY:-local}
+
+            if [[ -z "''${AWS_PROFILE:-}" ]]; then
+              export AWS_ACCESS_KEY_ID=''${AWS_ACCESS_KEY_ID:-local}
+              export AWS_SECRET_ACCESS_KEY=''${AWS_SECRET_ACCESS_KEY:-local}
+            fi
 
             echo "system-calls.com dev shell"
             echo "  rustc       : $(rustc --version)"

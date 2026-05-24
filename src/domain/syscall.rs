@@ -8,14 +8,16 @@ pub struct Syscall {
     pub abi: String,
     pub name: String,
     pub entry: String,
-    pub args: Vec<SyscallArg>,
+    #[serde(default, skip_deserializing)]
+    pub man_url: Option<String>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct SyscallArg {
-    pub index: u8,
-    pub register: String,
-    pub name: String,
-    #[serde(rename = "type")]
-    pub ty: String,
+pub fn man_url(os: &str, name: &str) -> Option<String> {
+    match os.to_lowercase().as_str() {
+        "linux" => Some(format!(
+            "https://man7.org/linux/man-pages/man2/{}.2.html",
+            name
+        )),
+        _ => None,
+    }
 }
