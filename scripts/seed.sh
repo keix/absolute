@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-TABLE="${DDB_TABLE:-system-calls-dev}"
+TABLE="${DDB_TABLE:-system-calls}"
 REGION="${AWS_REGION:-ap-northeast-1}"
 SEED_FILE="${1:-$(dirname "$0")/seed.json}"
 

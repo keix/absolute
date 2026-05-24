@@ -58,7 +58,7 @@ The local server listens on `:3000`. `seed.json` carries the register convention
 
 ## Schema
 
-Single table `system-calls-{env}`, keyed by `pk`/`sk` (both string).
+Single table `system-calls`, keyed by `pk`/`sk` (both string).
 
 | SK pattern | Item |
 | --- | --- |
@@ -80,15 +80,15 @@ First time per account/region:
 Build and deploy:
 
 ```sh
-./scripts/deploy.sh dev
+./scripts/deploy.sh
 ```
 
 The stack outputs `ApiUrl`, `TableName`, `FunctionName`. To seed the deployed table, unset the local DDB endpoint and target the real one:
 
 ```sh
 unset DDB_ENDPOINT AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY
-DDB_TABLE=system-calls-dev ./scripts/seed.sh scripts/seed-linux-x86_64.json
-DDB_TABLE=system-calls-dev ./scripts/seed.sh scripts/seed.json
+./scripts/seed.sh scripts/seed-linux-x86_64.json
+./scripts/seed.sh scripts/seed.json
 ```
 
 (Or run from a shell that has your real AWS credentials configured, outside `nix develop`.)

@@ -7,34 +7,29 @@ import * as apigwv2 from 'aws-cdk-lib/aws-apigatewayv2';
 import * as integrations from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import * as path from 'path';
 
-export interface ApiStackProps extends cdk.StackProps {
-  envName: string;
-}
-
 export class ApiStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props: ApiStackProps) {
+  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const isProd = props.envName === 'prod';
-    const tableName = `system-calls-${props.envName}`;
-    const functionName = `system-calls-api-${props.envName}`;
-    const apiName = `system-calls-api-${props.envName}`;
+    const tableName = 'system-calls';
+    const functionName = 'system-calls-api';
+    const apiName = 'system-calls-api';
 
     const table = new dynamodb.Table(this, 'Table', {
       tableName,
       partitionKey: { name: 'pk', type: dynamodb.AttributeType.STRING },
       sortKey: { name: 'sk', type: dynamodb.AttributeType.STRING },
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
-      removalPolicy: isProd ? cdk.RemovalPolicy.RETAIN : cdk.RemovalPolicy.DESTROY,
+      removalPolicy: cdk.RemovalPolicy.RETAIN,
       pointInTimeRecoverySpecification: {
-        pointInTimeRecoveryEnabled: isProd,
+        pointInTimeRecoveryEnabled: true,
       },
     });
 
     const logGroup = new logs.LogGroup(this, 'FunctionLogGroup', {
       logGroupName: `/aws/lambda/${functionName}`,
       retention: logs.RetentionDays.ONE_WEEK,
-      removalPolicy: isProd ? cdk.RemovalPolicy.RETAIN : cdk.RemovalPolicy.DESTROY,
+      removalPolicy: cdk.RemovalPolicy.RETAIN,
     });
 
     const fn = new lambda.Function(this, 'Function', {

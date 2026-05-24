@@ -43,7 +43,7 @@
             export AWS_PAGER=""
             export RUST_LOG=''${RUST_LOG:-info,system_calls=debug}
             export DDB_ENDPOINT=''${DDB_ENDPOINT:-http://localhost:8000}
-            export DDB_TABLE=''${DDB_TABLE:-system-calls-dev}
+            export DDB_TABLE=''${DDB_TABLE:-system-calls}
             export AWS_REGION=''${AWS_REGION:-ap-northeast-1}
 
             if [[ -z "''${AWS_PROFILE:-}" ]]; then
