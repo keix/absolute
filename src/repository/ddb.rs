@@ -4,8 +4,14 @@ use aws_sdk_dynamodb::types::AttributeValue;
 use aws_sdk_dynamodb::Client;
 use serde_dynamo::{from_item, from_items};
 
+use crate::domain::syscall::man_url;
 use crate::domain::{RegisterConvention, Syscall};
 use crate::error::{AppError, Result};
+
+fn enrich(mut s: Syscall) -> Syscall {
+    s.man_url = man_url(&s.os, &s.name);
+    s
+}
 
 #[derive(Debug)]
 pub struct SyscallRepository {
@@ -39,7 +45,7 @@ impl SyscallRepository {
             .map_err(|e| AppError::Ddb(e.to_string()))?;
 
         match resp.item {
-            Some(item) => Ok(Some(from_item(item)?)),
+            Some(item) => Ok(Some(enrich(from_item(item)?))),
             None => Ok(None),
         }
     }
@@ -61,7 +67,7 @@ impl SyscallRepository {
             .map_err(|e| AppError::Ddb(e.to_string()))?;
 
         match resp.item {
-            Some(item) => Ok(Some(from_item(item)?)),
+            Some(item) => Ok(Some(enrich(from_item(item)?))),
             None => Ok(None),
         }
     }
@@ -93,7 +99,7 @@ impl SyscallRepository {
 
             if let Some(items) = resp.items {
                 let chunk: Vec<Syscall> = from_items(items)?;
-                acc.extend(chunk);
+                acc.extend(chunk.into_iter().map(enrich));
             }
 
             match resp.last_evaluated_key {
