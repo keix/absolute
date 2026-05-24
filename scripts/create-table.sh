@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-TABLE="${DDB_TABLE:-system-calls-dev}"
+TABLE="${DDB_TABLE:-system-calls}"
 ENDPOINT="${DDB_ENDPOINT:-http://localhost:8000}"
 REGION="${AWS_REGION:-ap-northeast-1}"
 
