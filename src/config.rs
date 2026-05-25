@@ -7,8 +7,7 @@ pub struct Config {
 impl Config {
     pub fn from_env() -> Self {
         Self {
-            table_name: std::env::var("DDB_TABLE")
-                .unwrap_or_else(|_| "system-calls-dev".into()),
+            table_name: std::env::var("DDB_TABLE").unwrap_or_else(|_| "system-calls".into()),
             ddb_endpoint: std::env::var("DDB_ENDPOINT").ok(),
         }
     }

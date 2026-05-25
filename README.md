@@ -59,7 +59,7 @@ The local server listens on `:3000`.
 
 ## Schema
 
-Single table `system-calls`, keyed by `pk`/`sk` (both string).
+Single table `system-calls`, keyed by `pk`/`sk` (both string). This is also the default `DDB_TABLE` used by the app and helper scripts.
 
 | SK pattern | Item |
 | --- | --- |
