@@ -14,8 +14,9 @@ name = "local"
 path = "src/bin/local.rs"
 
 [dependencies]
+async-trait = "0.1"
 axum = "0.7"
-tower = "0.5"
+tower = { version = "0.5", features = ["util"] }
 tower-http = { version = "0.6", features = ["trace", "cors"] }
 http = "1"
 tokio = { version = "1", features = ["macros", "rt-multi-thread", "signal"] }

@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 
+use async_trait::async_trait;
 use aws_sdk_dynamodb::types::AttributeValue;
 use aws_sdk_dynamodb::Client;
 use serde_dynamo::{from_item, from_items};
@@ -7,6 +8,7 @@ use serde_dynamo::{from_item, from_items};
 use crate::domain::syscall::man_url;
 use crate::domain::{RegisterConvention, Syscall};
 use crate::error::{AppError, Result};
+use crate::repository::SyscallStore;
 
 fn enrich(mut s: Syscall) -> Syscall {
     s.man_url = man_url(&s.os, &s.name);
@@ -28,7 +30,11 @@ impl SyscallRepository {
         format!("{}#{}", os.to_uppercase(), arch)
     }
 
-    pub async fn get_by_name(
+}
+
+#[async_trait]
+impl SyscallStore for SyscallRepository {
+    async fn get_by_name(
         &self,
         os: &str,
         arch: &str,
@@ -50,7 +56,7 @@ impl SyscallRepository {
         }
     }
 
-    pub async fn get_by_number(
+    async fn get_by_number(
         &self,
         os: &str,
         arch: &str,
@@ -72,7 +78,7 @@ impl SyscallRepository {
         }
     }
 
-    pub async fn list(&self, os: &str, arch: &str) -> Result<Vec<Syscall>> {
+    async fn list(&self, os: &str, arch: &str) -> Result<Vec<Syscall>> {
         let mut acc: Vec<Syscall> = Vec::new();
         let mut last_key: Option<HashMap<String, AttributeValue>> = None;
 
@@ -111,7 +117,7 @@ impl SyscallRepository {
         Ok(acc)
     }
 
-    pub async fn get_register_convention(
+    async fn get_register_convention(
         &self,
         os: &str,
         arch: &str,
