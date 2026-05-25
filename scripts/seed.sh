@@ -19,14 +19,24 @@ COUNT=$(jq 'length' "$SEED_FILE")
 echo "loading $COUNT items from $SEED_FILE into $TABLE"
 
 for ((i = 0; i < COUNT; i += 25)); do
-  CHUNK=$(jq --arg t "$TABLE" --argjson off "$i" \
+  REQUEST_ITEMS=$(jq --arg t "$TABLE" --argjson off "$i" \
     '{($t): .[$off:($off + 25)]}' "$SEED_FILE")
 
-  aws dynamodb batch-write-item \
-    --request-items "$CHUNK" \
-    "${ENDPOINT_FLAG[@]}" \
-    --region "$REGION" \
-    >/dev/null
+  while :; do
+    RESPONSE=$(aws dynamodb batch-write-item \
+      --request-items "$REQUEST_ITEMS" \
+      "${ENDPOINT_FLAG[@]}" \
+      --region "$REGION")
+
+    UNPROCESSED_COUNT=$(jq '[.UnprocessedItems[]?[]] | length' <<<"$RESPONSE")
+    if [[ "$UNPROCESSED_COUNT" -eq 0 ]]; then
+      break
+    fi
+
+    echo "  retrying $UNPROCESSED_COUNT unprocessed items"
+    REQUEST_ITEMS=$(jq '{(.UnprocessedItems | to_entries[0].key): (.UnprocessedItems | to_entries[0].value)}' <<<"$RESPONSE")
+    sleep 1
+  done
 
   END=$((i + 25 < COUNT ? i + 25 : COUNT))
   printf "  %d/%d\n" "$END" "$COUNT"
